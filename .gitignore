@@ -1,0 +1,6 @@
+mysql
+**/__pycache__/
+**/.pytest_cache/
+.env
+docker-compose.yml
+venv
