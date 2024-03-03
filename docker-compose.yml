@@ -1,0 +1,36 @@
+version: "3.1"
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: my-mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: unless-stopped
+    # networks:
+    #   containers:
+    #     ipv4_address: 172.21.0.3
+
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: bot
+    container_name: bot-container
+    environment:
+      - DB_HOST=my-mysql-container
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - IQ_EMAIL=${IQ_EMAIL}
+      - IQ_PASSWORD=${IQ_PASSWORD}
+      - IQ_MODE=${IQ_MODE}
+      - IQ_PERIOD=${IQ_PERIOD}
+    restart: unless-stopped
