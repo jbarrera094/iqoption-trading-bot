@@ -14,15 +14,11 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     restart: unless-stopped
-    # networks:
-    #   containers:
-    #     ipv4_address: 172.21.0.3
 
   bot:
     build:
       context: .
       dockerfile: Dockerfile
-    # image: bot
     container_name: bot-container
     environment:
       - DB_HOST=my-mysql-container

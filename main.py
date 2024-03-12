@@ -17,6 +17,9 @@ iq_email = os.getenv("IQ_EMAIL")
 iq_password = os.getenv("IQ_PASSWORD")
 iq_mode = os.getenv("IQ_MODE")
 iq_period = int(os.getenv("IQ_PERIOD"))
+delay = int(os.getenv("DELAY"))
+print(f"Delay: {delay}")
+print(f"Period: {iq_period}")
 
 # Initialize depedencies
 mysql_connector = MySQLConnector(
@@ -64,7 +67,7 @@ while True:
 
         # hacer el Commit
         mysql_connector.commit()
-        time.sleep(iq_period)
+        time.sleep(delay)
     except KeyboardInterrupt:
         # Maneja la interrupción del teclado (Ctrl+C)
         print("Interrupción del usuario. Saliendo...")
